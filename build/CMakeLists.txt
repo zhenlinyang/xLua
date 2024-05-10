@@ -91,26 +91,26 @@ else ()
 	#   ${LUA_SRC_PATH}/lutf8lib.c ${LUA_SRC_PATH}/loadlib.c )
 endif ()
 
-set ( LUA_SOCKET
-    luasocket/auxiliar.c
-    luasocket/buffer.c
-    luasocket/except.c
-    luasocket/inet.c
-    luasocket/io.c
-    luasocket/luasocket.c
-    luasocket/mime.c
-    luasocket/options.c
-    luasocket/select.c
-    luasocket/tcp.c
-    luasocket/timeout.c
-    luasocket/udp.c 
-)
+#set ( LUA_SOCKET
+#    luasocket/auxiliar.c
+#    luasocket/buffer.c
+#    luasocket/except.c
+#    luasocket/inet.c
+#    luasocket/io.c
+#    luasocket/luasocket.c
+#    luasocket/mime.c
+#    luasocket/options.c
+#    luasocket/select.c
+#    luasocket/tcp.c
+#    luasocket/timeout.c
+#    luasocket/udp.c 
+#)
 
-if ( WIN32 AND NOT CYGWIN )
-    list (APPEND LUA_SOCKET luasocket/wsocket.c)
-else ( )
-    list (APPEND LUA_SOCKET luasocket/usocket.c)
-endif ( )
+#if ( WIN32 AND NOT CYGWIN )
+#    list (APPEND LUA_SOCKET luasocket/wsocket.c)
+#else ( )
+#    list (APPEND LUA_SOCKET luasocket/usocket.c)
+#endif ( )
 
 set ( XLUA_CORE
     i64lib.c
@@ -138,7 +138,7 @@ macro(source_group_by_dir proj_dir source_files)
     endif(MSVC OR APPLE)
 endmacro(source_group_by_dir)
 
-source_group_by_dir(${CMAKE_CURRENT_SOURCE_DIR} LUA_SOCKET)
+#source_group_by_dir(${CMAKE_CURRENT_SOURCE_DIR} LUA_SOCKET)
 source_group_by_dir(${CMAKE_CURRENT_SOURCE_DIR} LUA_CORE)
 source_group_by_dir(${CMAKE_CURRENT_SOURCE_DIR} LUA_LIB)
 source_group_by_dir(${CMAKE_CURRENT_SOURCE_DIR} XLUA_CORE)
@@ -150,7 +150,7 @@ if (APPLE)
         add_library(xlua STATIC
            ${LUA_CORE}
            ${LUA_LIB}
-           ${LUA_SOCKET}
+           #${LUA_SOCKET}
            ${XLUA_CORE}
            ${THIRDPART_SRC}
         )
@@ -163,7 +163,7 @@ if (APPLE)
             add_library(xlua SHARED
                 ${LUA_CORE}
                 ${LUA_LIB}
-                ${LUA_SOCKET}
+                #${LUA_SOCKET}
                 ${XLUA_CORE}
                 ${THIRDPART_SRC}
             )
@@ -172,7 +172,7 @@ if (APPLE)
             add_library(xlua MODULE
                 ${LUA_CORE}
                 ${LUA_LIB}
-                ${LUA_SOCKET}
+                #${LUA_SOCKET}
                 ${XLUA_CORE}
                 ${THIRDPART_SRC}
             )
@@ -193,7 +193,7 @@ else ( )
     add_library(xlua SHARED
         ${LUA_CORE}
         ${LUA_LIB}
-        ${LUA_SOCKET}
+        #${LUA_SOCKET}
         ${XLUA_CORE}
         ${THIRDPART_SRC}
     )
@@ -211,12 +211,12 @@ if (LUAC_COMPATIBLE_FORMAT AND NOT USING_LUAJIT)
     target_compile_definitions (xlua PRIVATE LUAC_COMPATIBLE_FORMAT)
 endif ()
 
-set_property(
-	SOURCE ${LUA_SOCKET}
-	APPEND
-	PROPERTY COMPILE_DEFINITIONS
-	LUA_COMPAT_APIINTCASTS LUA_LIB _CRT_SECURE_NO_WARNINGS _WINSOCK_DEPRECATED_NO_WARNINGS
-)
+#set_property(
+#	SOURCE ${LUA_SOCKET}
+#	APPEND
+#	PROPERTY COMPILE_DEFINITIONS
+#	LUA_COMPAT_APIINTCASTS LUA_LIB _CRT_SECURE_NO_WARNINGS _WINSOCK_DEPRECATED_NO_WARNINGS
+#)
 
 if(UINT_ESPECIALLY)
     ADD_DEFINITIONS(-DUINT_ESPECIALLY)
