@@ -190,7 +190,7 @@ elseif ("${CMAKE_SYSTEM_NAME}" STREQUAL "Switch")
     )
     target_compile_options(xlua PRIVATE -m64 -mcpu=cortex-a57+fp+simd+crypto+crc -fno-common -fno-short-enums -ffunction-sections -fdata-sections -fPIC -fms-extensions)
 else ( )
-    add_library(xlua SHARED
+    add_library(xlua STATIC
         ${LUA_CORE}
         ${LUA_LIB}
         #${LUA_SOCKET}
